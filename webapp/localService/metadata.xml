@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://vid:44300/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZJMCDS_QM_C_NOTI_SM001_CDS" xml:lang="de" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_PlantStdVHType" sap:label="Std.-WH Werk" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Werk"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Name des Werks"/>
+            </EntityType>
+            <EntityType Name="ZJMCDS_QM_C_NOTI_SM001Result" sap:semantics="aggregate" sap:label="QM-Meldungen: Sofort-Maßnahmen" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QualityNotification" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Meldung" sap:quickinfo="Meldungsnummer"/>
+                <Property Name="NotificationTask" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Maßnahme" sap:quickinfo="Laufende Nummer der Maßnahme"/>
+                <Property Name="NotificationType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Meldungsart" sap:value-list="standard"/>
+                <Property Name="Werk" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Werk" sap:value-list="standard"/>
+                <Property Name="NotificationStatusLine" Type="Edm.String" MaxLength="255" sap:aggregation-role="dimension" sap:label="Status QM-Meldung" sap:quickinfo="Status zur QM-Meldung"/>
+                <Property Name="NotificationUserStatusLine" Type="Edm.String" MaxLength="255" sap:aggregation-role="dimension" sap:label="UserStatusQM-Meldung" sap:quickinfo="UserStatus zur QM-Meldung"/>
+                <Property Name="NotificationTaskStatusLine" Type="Edm.String" MaxLength="255" sap:aggregation-role="dimension" sap:label="Status QM-Maßnahme" sap:quickinfo="Status zur QM-Maßnahme"/>
+                <Property Name="NotificationTaskUserStatusLine" Type="Edm.String" MaxLength="255" sap:aggregation-role="dimension" sap:label="UserStatusQMMaßnahme" sap:quickinfo="UserStatus zur QM-Massnahme"/>
+                <Property Name="QualityTaskCodeCatalog" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Katalogart" sap:quickinfo="Katalogart - Maßnahmen"/>
+                <Property Name="QualityTaskCodeGroup" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Codegruppe" sap:quickinfo="Codegruppe - Maßnahmen"/>
+                <Property Name="QualityTaskCode" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Maßnahmencode"/>
+                <Property Name="QualityTaskCodeText" Type="Edm.String" MaxLength="40" sap:label="Text zum Maßnahmencode"/>
+                <Property Name="QualityTaskCodeShortText" Type="Edm.String" MaxLength="40" sap:label="Maßnahmentext" sap:quickinfo="Kurztext zur Maßnahme"/>
+                <Property Name="QualityTaskCodeLongText" Type="Edm.String" sap:label="Langtext"/>
+                <Property Name="ResponsiblePerson" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Verantwortlich" sap:quickinfo="Verantwortlicher der Maßnahme (Partnernummer)"/>
+                <Property Name="ResponsiblePersonFullname" Type="Edm.String" MaxLength="80" sap:aggregation-role="dimension" sap:label="Verantw. Name" sap:quickinfo="Verantwortlicher Vollständiger Name"/>
+                <Property Name="QualityTaskCreationDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Angelegt am" sap:quickinfo="Datum, an dem der Satz hinzugefügt wurde"/>
+                <Property Name="CalendarYear" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Kalenderjahr"/>
+                <Property Name="CalendarQuarterName" Type="Edm.String" MaxLength="60" sap:label="Quartal"/>
+                <Property Name="CalendarMonthName" Type="Edm.String" MaxLength="60" sap:label="Monat"/>
+                <Property Name="CalendarWeek" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Kalenderwoche"/>
+                <Property Name="NotifTaskPlannedStartDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Gepl. Beginndatum" sap:quickinfo="Geplanter Starttermin"/>
+                <Property Name="NotifTaskPlannedEndDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Geplantes Ende" sap:quickinfo="Geplanter Endtermin"/>
+                <Property Name="NotifTaskCompletionDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Erledigungsdatum" sap:quickinfo="Datum, an dem die Maßnahme erledigt wurde"/>
+                <Property Name="NotifTaskCompletedBy" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Erledigt von" sap:quickinfo="Sachbearbeiter, der die Maßnahme erledigt hat"/>
+                <Property Name="Delay_Neu" Type="Edm.Int32" sap:aggregation-role="dimension" sap:label="In Verzug"/>
+                <Property Name="InTime" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="In Zeit"/>
+                <Property Name="Refnum" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Referenznummer" sap:quickinfo="externe Referenznummer"/>
+                <Property Name="Lifnum" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Lieferant" sap:quickinfo="Kontonummer des Lieferanten"/>
+                <Property Name="Qwrnum" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Vorlage Meldung" sap:quickinfo="Vorlagennummer der Meldung"/>
+                <Property Name="QualityNotificationTaskCount" Type="Edm.Int32" sap:aggregation-role="measure" sap:label="Anzahl Qualitätsmaßnahmen" sap:filterable="false"/>
+                <NavigationProperty Name="Parameters" Relationship="ZJMCDS_QM_C_NOTI_SM001_CDS.assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" FromRole="ToRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" ToRole="FromRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZJMCDS_QM_C_NOTI_SM001Parameters" sap:semantics="parameters" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="P_StartDate"/>
+                    <PropertyRef Name="P_EndDate"/>
+                </Key>
+                <Property Name="P_StartDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:parameter="mandatory" sap:label="Datum von" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="P_EndDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:parameter="mandatory" sap:label="Datum bis" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Results" Relationship="ZJMCDS_QM_C_NOTI_SM001_CDS.assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" FromRole="FromRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" ToRole="ToRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC"/>
+            </EntityType>
+            <EntityType Name="ZJMCDS_VH_QMARTType" sap:label="Werthilfe QM-Meldungsarten" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NotificationType"/>
+                </Key>
+                <Property Name="NotificationType" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:text="NotificationTypeName" sap:label="Meldungsart"/>
+                <Property Name="NotificationTypeName" Type="Edm.String" MaxLength="20" sap:label="Meldungsart" sap:quickinfo="Texte für Meldungsarten"/>
+            </EntityType>
+            <Association Name="assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" sap:content-version="1">
+                <End Type="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001Parameters" Multiplicity="1" Role="FromRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC"/>
+                <End Type="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001Result" Multiplicity="*" Role="ToRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC"/>
+            </Association>
+            <EntityContainer Name="ZJMCDS_QM_C_NOTI_SM001_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_PlantStdVH" EntityType="ZJMCDS_QM_C_NOTI_SM001_CDS.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZJMCDS_QM_C_NOTI_SM001Results" EntityType="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001Result" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ZJMCDS_QM_C_NOTI_SM001" EntityType="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001Parameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZJMCDS_VH_QMART" EntityType="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_VH_QMARTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" Association="ZJMCDS_QM_C_NOTI_SM001_CDS.assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZJMCDS_QM_C_NOTI_SM001" Role="FromRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC"/>
+                    <End EntitySet="ZJMCDS_QM_C_NOTI_SM001Results" Role="ToRole_assoc_1B6E81E32CDDBFADB6C2E243B2A77FCC"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001Result/NotificationType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Werthilfe QM-Meldungsarten"/>
+                        <PropertyValue Property="CollectionPath" String="ZJMCDS_VH_QMART"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="NotificationType"/>
+                                    <PropertyValue Property="ValueListProperty" String="NotificationType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="NotificationTypeName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001Result/Werk" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Plant Std VH"/>
+                        <PropertyValue Property="CollectionPath" String="I_PlantStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Werk"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001_CDS_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001_CDS_Entities/ZJMCDS_QM_C_NOTI_SM001" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>P_StartDate</PropertyPath>
+                                <PropertyPath>P_EndDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="Parameters"/>
+                                    <PropertyValue Property="FilterRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Filterable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>P_StartDate</PropertyPath>
+                                <PropertyPath>P_EndDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJMCDS_QM_C_NOTI_SM001_CDS.ZJMCDS_QM_C_NOTI_SM001_CDS_Entities/ZJMCDS_QM_C_NOTI_SM001Results" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                                <PropertyPath>QualityNotificationTaskCount</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="QualityTaskCodeLongText"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                                <PropertyPath>QualityTaskCodeLongText</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://vid:44300/sap/opu/odata/sap/ZJMCDS_QM_C_NOTI_SM001_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://vid:44300/sap/opu/odata/sap/ZJMCDS_QM_C_NOTI_SM001_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
